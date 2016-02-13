@@ -24,7 +24,7 @@
             background: -webkit-linear-gradient(45deg, #83ddff 0%,#4f9add 100%); 
             background: linear-gradient(45deg, #83ddff 0%,#4f9add 100%);
             filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#83ddff', endColorstr='#4f9add',GradientType=1 );
-            height: 90vh;
+            min-height: 90vh;
         }
 
         .head1 a {
@@ -83,10 +83,9 @@
         }
 
         .logo {
-            width: 40%;
+            max-width: 35%;
             margin-left: auto;
             margin-right: auto;
-            margin-top: 5%;
             text-align: center;
 
         }
@@ -105,15 +104,38 @@
             font-weight: 100;
         }
 
+        #justin {
+            position: absolute;
+            bottom: 10%;
+    	    left: 0;
+            right: 0;
+            width: 25%;
+            max-width: 550px;
+            min-width: 250px;
+            z-index: 0;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .head1-contents {
+            width: 100%;
+            position: absolute;
+            z-index: 1;
+        }
+
+
     </style>
 </head>
 <body>
     <div class="container-fluid">
         <img src="img/jsa.png" id="jsa">
+        <img src="img/justin-bg.png" id="justin">
         <div class="row head1">
+            <div class="head1-contents">
             <img src="img/logo.png" class="img-responsive logo">
             <h1 class="hero">We're going to change JSA</h1>
             <h3><a class="btn btn-primary btn-lg text-center" href="#" role="button">Read the campaign platform</a></h3>
+            </div>
         </div>
         <div class="row head2">
             <div class="col-md-4">
