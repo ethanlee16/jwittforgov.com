@@ -54,13 +54,14 @@
         .head2 {
             /*background-color: rgb(189, 31, 43);*/
 
-            height: 60vh;
+            /*height: 60vh;*/
             color: #4F9ADD;
             text-align: center;
         }
 
         .head2 .col-md-4 {
             margin-top: 5%;
+            margin-bottom: 5%;
             font-family: "Segoe UI", "Helvetica Neue", sans-serif;
         }
 
@@ -97,11 +98,13 @@
         }
 
         .hero {
+            font-style: italic;
             text-align: center;
             color: white;
             font-family: "Segoe UI", "Helvetica Neue", sans-serif;
             font-size: 64pt;
             font-weight: 100;
+            /*text-transform: uppercase;*/
         }
 
         #justin {
@@ -122,7 +125,15 @@
             position: absolute;
             z-index: 1;
         }
-
+        
+        @media (max-width: 480px) {
+            #jsa {
+                display: none;
+            }
+            .hero {
+                font-size: 36pt;
+            }
+        }
 
     </style>
 </head>
@@ -133,7 +144,7 @@
         <div class="row head1">
             <div class="head1-contents">
             <img src="img/logo.png" class="img-responsive logo">
-            <h1 class="hero">We're going to change JSA</h1>
+            <h1 class="hero">Make JSA even greater</h1>
             <h3><a class="btn btn-primary btn-lg text-center" href="#" role="button">Read the campaign platform</a></h3>
             </div>
         </div>
