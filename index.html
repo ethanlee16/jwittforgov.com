@@ -80,7 +80,8 @@
 
         .head3 {
             background-color: rgb(189, 31, 43);
-            height: 20vh;
+            padding: 2% 5% 2% 5%;
+            color: white;
         }
 
         .logo {
@@ -125,6 +126,20 @@
             position: absolute;
             z-index: 1;
         }
+
+        #contact input[type="text"], input[type="email"], textarea {
+          width: 100%;
+          display: block;
+          background: none;
+          outline: 0;
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          border-bottom: 2px solid white;
+          color: white;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
         
         @media (max-width: 480px) {
             #jsa {
@@ -150,22 +165,64 @@
         </div>
         <div class="row head2">
             <div class="col-md-4">
-                <h2>Personal Connnection</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+                <h2>Reputation Rebuild</h2>
+                <p>JSA is in severe need of a reputation facelift. Central to my platform, and my candidacy as a whole, is reorganizing our publicity efforts to achieve a common end. My governorship will work harder and more efficiently to make JSA more locally and nationally known.</p>
             </div>
             <div class="col-md-4">
-                <h2>Reputation Rebuild</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+                <h2>Personal Connection</h2>
+                <p>As anyone who has met me knows, I pride myself on my humor and an ability to connect with people. I embrace my awkwardness and strive to be the fullest and most authentic expression of myself possible. Personal connection, in policy and interaction, accompanies me to the office.</p>
             </div>
             <div class="col-md-4">
                 <h2>Regional Rethink</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+                <p>As mayor, I understand many of the failures of our regional system, but I hate abandoning things that are well-intentioned and can be fixed. That’s why I wish to localize and to divide work, to make sure work and accountability are well delegated and equitably sourced.</p>
             </div>
         </div>
         <div class="row head3">
-
+            <div class="col-md-5">
+                <h1>Reach out!</h1>
+                <form role="form" onsubmit="subForm(); return false" id="contact">
+                    <label>Your Name</label>
+                      <input type="text" name="" id="name" placeholder="Enter Name" required="">
+                    <label>Your Email</label>
+                      <input type="email" id="email" name="" placeholder="Enter Email" required="">
+                    <label>Message</label>
+                      <textarea required="" id="message" placeholder="Enter your message here" name=""></textarea>
+                  <input type="submit" id="submit" value="Submit" class="btn btn-info">
+                </form>
+            </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function subForm() {
+            var xhr = new XMLHttpRequest();
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var message = document.getElementById("message").value;
+
+            if(!validateEmail(email)) {
+                // use display: block on an error message
+                alert("Invalid email, try again.");
+                return;
+            } else if(name.trim().length == 0 || message.trim().length == 0) {
+                alert("Please enter a name and a message.");
+                return;
+            }
+
+            xhr.open("POST", "https://docs.google.com/a/pixelclubs.org/forms/d/1QKR7HuioJ5ejq8Ll_hs8ET6qK5wL5900v2Ya1sB8_NE/formResponse", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("entry.1807359718=" + name + "&entry.1995049342=" + email + "&entry.1738486457=" + message);
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    alert("Success! We'll be contacting you soon.");
+                }
+            }
+        }
+
+        function validateEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+    </script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>
