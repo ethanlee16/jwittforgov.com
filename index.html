@@ -11,6 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Montserrat:100,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <style type="text/css">
         /* 
          *   Brand colors
@@ -47,6 +49,7 @@
               margin-top: 3%;
               margin-left: auto;
               margin-right: auto;
+              text-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
               /*text-shadow: 0px 0px 5px #000;*/
         }
 
@@ -130,6 +133,8 @@
             font-family: "Segoe UI", "Helvetica Neue", sans-serif;
             font-size: 64pt;
             font-weight: 100;
+            text-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
+            margin-top: 10%;
             /*text-transform: uppercase;*/
         }
 
@@ -138,8 +143,8 @@
             bottom: 10%;
     	    left: 0;
             right: 0;
-            width: 25%;
-            max-width: 550px;
+            width: 30%;
+            max-width: 300px;
             min-width: 250px;
             z-index: 0;
             margin-left: auto;
@@ -165,6 +170,58 @@
           margin-top: 10px;
           margin-bottom: 10px;
         }
+
+        #wrapper {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            display: none;
+        }
+
+        .interstitial {
+            position: absolute;
+            z-index: 9999;
+            height: 100vh;
+            width: 100%;
+            background-color: #6c8cf9;
+        }
+
+        .interstitial #it-justin {
+            position: absolute;
+            z-index: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40%;
+        }
+
+        .interstitial #it-header {
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            top: 15%;
+            width: 40%;
+        }
+
+        .interstitial a {
+            position: absolute;
+            bottom: 5%;
+            right: 5%;
+            font-size: 36pt;
+            font-style: italic;
+            text-align: center;
+            color: white;
+            font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+        }
+
+        body {
+            width: 100%;
+        }
         
         @media (max-width: 480px) {
             #jsa {
@@ -189,14 +246,25 @@
             .quote h1 {
                 font-size: 24pt;
             }
+            .interstitial #it-header {
+                width: 75%;
+            }
+            .interstitial #it-justin {
+                width: 100%;
+            }
         }
 
     </style>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid interstitial" id="it">
+        <img src="img/it-header.png" id="it-header">
+        <img src="img/it-justin.png" id="it-justin">
+        <a onclick="dismissInterstitial()">Continue to site</a>
+    </div>
+    <div class="container" id="wrapper">
         <img src="img/jsa.png" id="jsa">
-        <img src="img/justin-bg.png" id="justin">
+        <img src="img/justin-bg3.png" id="justin">
         <div class="row head1">
             <div class="head1-contents">
             <img src="img/logo.png" class="img-responsive logo">
@@ -219,12 +287,10 @@
             </div>
         </div>
         <div class="row quote">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                  <h1 style="text-align: center">
-                    "Let us understand that when we stand together, <span class="bb">we will always win</span>."<br><span style="font-size: 12pt; text-transform: uppercase">Bernie Sanders</span>
-                  </h1>
-                </div>
+            <div class="col-md-8 col-md-offset-2">
+              <h1 style="text-align: center">
+                "Let us understand that when we stand together, <span class="bb">we will always win</span>."<br><span style="font-size: 12pt; text-transform: uppercase">Bernie Sanders</span>
+              </h1>
             </div>
         </div>
         <div class="row head3">
@@ -243,6 +309,35 @@
         </div>
     </div>
     <script type="text/javascript">
+
+        if(getCookie("displayedInterstitial") === "true") {
+            $("#it").css("display", "none");
+            document.getElementById("wrapper").style.display = "block";
+        }
+
+        function dismissInterstitial() {
+            $("#it").css("display", "block");
+            $("#it").animate({
+                opacity: 0
+            }, 400, function() {
+                $("#it").css("display", "none");
+                document.cookie = "displayedInterstitial=true";
+            });
+            // document.getElementById("it").style.display = "none";
+            document.getElementById("wrapper").style.display = "block";
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+            }
+            return "";
+        }
+
         function subForm() {
             var xhr = new XMLHttpRequest();
             var name = document.getElementById("name").value;
